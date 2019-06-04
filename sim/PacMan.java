@@ -241,17 +241,7 @@ public class PacMan extends SimState
 
     public static void main(String[] args){
     	
-    	if(args.length > 1) {
-    		numOfPacs = Integer.parseInt(args[0]);
-    	}
-    	
-    	if(args.length > 2) {
-    		serverIP = args[1];
-    	}
-    	
-    	if(args.length > 3) {
-    		port = Integer.parseInt(args[2]);
-    	}
+    	initializeArguments (args);
     	
         doLoop(PacMan.class, args);
         System.exit(0);
