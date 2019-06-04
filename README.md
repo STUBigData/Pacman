@@ -6,7 +6,9 @@ The PacMan simulator is a multiplayer version of PacMan that connects to a serve
 This project extends the work of Sean Luke and MASON. The PacMan java code requires Mason version 19 to run.
 
 # Set Up
-Server:
+For both components to communicate, the server and the client must be running and configured to establish a connection.
+
+## Server:
 The server is a python 3 script that listens on port 1234. It will accept a connection from the PacMan simulator, output the json state at every simulation step, and send a random (N,E,W,S) action for PacMan 0. The server must be running before the simulation can connect to it.
 
 python PacServer.py
