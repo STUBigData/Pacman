@@ -22,6 +22,8 @@ Run PacManWithUI to see the gui of the simulation. Run with the following parame
 
 java PacManWithUI [number of Pacs] [Server IP] [Server Port] [Steps to transmit interval]
 
+java -jar PacManWithUI_Client.jar 1 127.0.0.1 1234 2
+
  - Number of Pacs: (int) - The number of pacmans in the simulator. They can be controled by index, starting with 0.
  - Server IP: IP of the python server that is running: 127.0.0.1
  - ServerPort: (int) - Port of the python server: 1234
@@ -31,6 +33,8 @@ java PacManWithUI [number of Pacs] [Server IP] [Server Port] [Steps to transmit 
 The simulation can run headless, without the GUI. The parameters are the same as PacManWithUI:
  
  java PacManWithUI [number of Pacs] [Server IP] [Server Port] [Steps to transmit interval]
+ 
+ java -jar PacMan_Client.jar 1 127.0.0.1 1234 2
  
 ## Output:
  The server will output each state it receives in json format. At the end of the game, by default when the first Pac dies or the game reaches level 4, the simulation will output a score in the format "score:180" to the console.
