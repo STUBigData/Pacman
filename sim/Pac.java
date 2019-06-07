@@ -372,7 +372,7 @@ public class Pac extends Agent implements Steppable
         
         
         if( pacman.deaths > 0 || pacman.level > 3 ) {
-        	System.out.println("Score:" + pacman.score);
+        	System.out.println("Score: " + pacman.score);
         	System.exit(0);
         }
         
