@@ -69,7 +69,7 @@ public class PacMan extends SimState
     PrintWriter out = null;
 
     PacClient pacClient = null;
-    double stepCounter = 0;
+    int stepCounter = 0;
     
     public static String serverIP = "127.0.0.1";
     public static int port = 1234;

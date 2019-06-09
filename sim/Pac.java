@@ -368,21 +368,31 @@ public class Pac extends Agent implements Steppable
         message += "EnergizersRemaining:" + energizersRemaining+ ", ";
         message += "Deaths:" + pacman.deaths + ", ";
         message += "Level:" + pacman.level + ", ";
+        message += "Step:" + pacman.stepCounter + ", ";
         message += "Score:" + pacman.score + " }";
         
+        // Transmit the state
+        if(((PacMan)state).out != null) {
+        	if(((PacMan)state).stepCounter % ((PacMan)state).stepsToTransmitInterval == 0 ||
+        			( pacman.deaths > 0 || pacman.level > 1 ) ) {
+        		((PacMan)state).out.println(message);
+        	}
+        }
         
-        if( pacman.deaths > 0 || pacman.level > 3 ) {
+        // Print the final states 
+        if( pacman.deaths > 0 || pacman.level > 1 ) {
         	System.out.println("Score: " + pacman.score);
+        	System.out.println("Steps: " + pacman.stepCounter);
+        	try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         	System.exit(0);
         }
         
         ((PacMan)state).stepCounter++;
-        if(((PacMan)state).out != null) {
-        	if(((PacMan)state).stepCounter == ((PacMan)state).stepsToTransmitInterval) {
-        		((PacMan)state).out.println(message);
-        		((PacMan)state).stepCounter = 0;
-        	}
-        }
     }
     
     /**
