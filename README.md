@@ -37,7 +37,7 @@ The simulation can run headless, without the GUI. The parameters are the same as
  java -jar PacMan_Client.jar 1 127.0.0.1 1234 2
  
 ## Output:
- The server will output each state it receives in json format. At the end of the game, by default when the first Pac dies or the game reaches level 4, the simulation will output a score in the format "score:180" to the console.
+ The server will output each state it receives in json format. At the end of the game, by default when the first Pac dies or completes level 1, the simulation will output a score and the number of steps that elapsed in the game in the format "score:180\nsteps:270" to the console, where score and steps are on separate lines.
  
  # Acknowledgement:
  Credit for the PacMan simulation implementation to Sean Luke and Vittorio Zipparo. The work here extends their work to allow remote decision making for the Pacs.
