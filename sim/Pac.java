@@ -183,43 +183,60 @@ public class Pac extends Agent implements Steppable
         int dotsRemaining = 0;
         
         
-        System.out.print("host:" +((PacMan)state).hostName + ",");
+        System.out.print("\"host\": \"" +((PacMan)state).hostName + "\", ");
         
         LocalDateTime myDateObj = LocalDateTime.now(); 
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM/dd/yyyy"); 
         String formattedDate = myDateObj.format(myFormatObj); 
-        System.out.print("date:" + formattedDate + ",");
+        System.out.print("\"date\": \"" + formattedDate + "\", ");
         myFormatObj = DateTimeFormatter.ofPattern("HH:mm:ss"); 
         String formattedTime = myDateObj.format(myFormatObj); 
-        System.out.print("time:" + formattedTime + ",");
+        System.out.print("\"time\": \"" + formattedTime + "\", ");
         
         // Get Energizers
+        System.out.print("\"Energizers\": [ ");
         for(int i = 0; i < pacman.dots.allObjects.size(); i++) {
         	Object obj = pacman.dots.allObjects.objs[i];
         	if(obj instanceof Energizer) {
         		Energizer energizer = (Energizer)obj;
-	        	System.out.print("name:" + energizer.name + ",");
-	        	System.out.print("x:" + (int)(energizer.x) + ",");
-	        	System.out.print("y:" + (int)(energizer.y) + ",");
+        		
+        		if(energizersRemaining > 0) {
+        			System.out.print(", ");
+        		}
+        		
+        		System.out.print("{");
+	        	System.out.print("{ \"x\": " + (int)(energizer.x) + ", ");
+	        	System.out.print("\"y\": " + (int)(energizer.y) + " }");
+	        	System.out.print("}");
         	
         		energizersRemaining++;
         	}
         }
+        System.out.print(" ], ");
         
         // Dots
+        System.out.print("\"Dots\": [ ");
         for(int i = 0; i < pacman.dots.allObjects.size(); i++) {
         	Object obj = pacman.dots.allObjects.objs[i];
         	if(obj instanceof Dot && !(obj instanceof Energizer)) {
         		Dot dot = (Dot)obj;
-	        	System.out.print("name:" + dot.name + ",");
-	        	System.out.print("x:" + (int)(dot.x) + ",");
-	        	System.out.print("y:" + (int)(dot.y) + ",");
+        		
+        		if(dotsRemaining > 0) {
+        			System.out.print(", ");
+        		}
+        		
+        		System.out.print("{");
+	        	System.out.print("\"x\": " + (int)(dot.x) + ", ");
+	        	System.out.print("\"y\": " + (int)(dot.y) );
+	        	System.out.print("} ");
         	
 	        	dotsRemaining++;
         	}
         }
+        System.out.print("], ");
         
         // Ghosts
+        System.out.print("\"Ghosts\": [ ");
         for(int i = 0; i < pacman.agents.allObjects.size(); i++) {
         	Agent agent = ((Agent)pacman.agents.allObjects.objs[i]);
         	if(agent instanceof Ghost) {
@@ -255,15 +272,15 @@ public class Pac extends Agent implements Steppable
         int ghostsRemaining = 0;
         int pacsRemaining = 0;
         
-        String message = "{ host:" +((PacMan)state).hostName + ", ";
+        String message = "{ \"host\": \"" +((PacMan)state).hostName + "\", ";
         
         LocalDateTime myDateObj = LocalDateTime.now(); 
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM/dd/yyyy"); 
         String formattedDate = myDateObj.format(myFormatObj); 
-        message += "date:" + formattedDate + ", ";
+        message += "\"date\": \"" + formattedDate + "\", ";
         myFormatObj = DateTimeFormatter.ofPattern("HH:mm:ss"); 
         String formattedTime = myDateObj.format(myFormatObj); 
-        message += "time:" + formattedTime + ", ";
+        message += "\"time\": \"" + formattedTime + "\", ";
         
         int numOfDots = 0;
         int numOfEnergizers = 0;
@@ -293,14 +310,14 @@ public class Pac extends Agent implements Steppable
         }
         
         // Get Energizers
-        message += "Energizers: [";
+        message += "\"energizers\": [ ";
         for(int i = 0; i < pacman.dots.allObjects.size(); i++) {
         	Object obj = pacman.dots.allObjects.objs[i];
         	if(obj instanceof Energizer) {
         		Energizer energizer = (Energizer)obj;
-        		message += "{name: {" + energizer.name + ", ";
-        		message += "x:" + (int)(energizer.x) + ", ";
-        		message += "y:" + (int)(energizer.y) + "}";
+        		message += "{ ";
+        		message += "\"x\": " + (int)(energizer.x) + ", ";
+        		message += "\"y\": " + (int)(energizer.y) + " }";
         	
         		if(energizersRemaining < numOfEnergizers-1) {
         			message += ", ";
@@ -308,17 +325,17 @@ public class Pac extends Agent implements Steppable
         		energizersRemaining++;
         	}
         }
-        message += "], ";
+        message += " ], ";
         
         // Dots
-        message += "Dots: [";
+        message += "\"dots\": [ ";
         for(int i = 0; i < pacman.dots.allObjects.size(); i++) {
         	Object obj = pacman.dots.allObjects.objs[i];
         	if(obj instanceof Dot && !(obj instanceof Energizer)) {
         		Dot dot = (Dot)obj;
-        		message += "{name:" + dot.name + ", ";
-        		message += "x:" + (int)(dot.x) + ", ";
-        		message += "y:" + (int)(dot.y) + "}";
+        		message += "{ ";
+        		message += "\"x\": " + (int)(dot.x) + ", ";
+        		message += "\"y\": " + (int)(dot.y) + " }";
         		
         		if(dotsRemaining < numOfDots-1) {
         			message += ", ";
@@ -327,17 +344,17 @@ public class Pac extends Agent implements Steppable
 	        	dotsRemaining++;
         	}
         }
-        message += "], ";
+        message += " ], ";
         
         // Ghosts
-        message += "Ghosts: [";
+        message += "\"ghosts\": [ ";
         for(int i = 0; i < pacman.agents.allObjects.size(); i++) {
         	Agent agent = ((Agent)pacman.agents.allObjects.objs[i]);
         	if(agent instanceof Ghost) {
-        		message += "{name:" + agent.name + ", ";
-        		message += "x:" + agent.location.x + ", ";
-        		message += "y:" + agent.location.y + ", ";
-        		message += "lastAction:" + lastActionToChar(agent.lastAction) + "}";
+        		message += "{ \"name\": \"" + agent.name + "\", ";
+        		message += "\"x\": " + agent.location.x + ", ";
+        		message += "\"y\": " + agent.location.y + ", ";
+        		message += "\"lastAction\": \"" + lastActionToChar(agent.lastAction) + "\" }";
         		
         		if(ghostsRemaining < numOfGhosts-1) {
         			message += ", ";
@@ -345,16 +362,17 @@ public class Pac extends Agent implements Steppable
         		ghostsRemaining++;
         	}
         }
-        message += "], ";
+        message += " ], ";
         
+        message += "\"pacs\": [ ";
         for(int i = 0; i < pacman.agents.allObjects.size(); i++) {
         	Agent agent = ((Agent)pacman.agents.allObjects.objs[i]);
         	if(agent instanceof Pac) {
         		Pac pac = (Pac)agent;
-        		message += "{name:" + pac.name + ", ";
-        		message += "x:" + pac.location.x + ", ";
-        		message += "y:" + pac.location.y + ", ";
-        		message += "action:" + lastActionToChar(pacman.getNextAction(pac.tag)) + "}";
+        		message += "{ \"name\": \"" + pac.name + "\", ";
+        		message += "\"x\": " + pac.location.x + ", ";
+        		message += "\"y\": " + pac.location.y + ", ";
+        		message += "\"lastAction\": \"" + lastActionToChar(pacman.getNextAction(pac.tag)) + "\" }";
         		
         		if(pacsRemaining < numOfPacs-1) {
         			message += ", ";
@@ -362,14 +380,14 @@ public class Pac extends Agent implements Steppable
         		pacsRemaining++;
         	}
         }
-        message += "], ";
+        message += " ], ";
         
-        message += "DotsRemaining:" + dotsRemaining + ", ";
-        message += "EnergizersRemaining:" + energizersRemaining+ ", ";
-        message += "Deaths:" + pacman.deaths + ", ";
-        message += "Level:" + pacman.level + ", ";
-        message += "Step:" + pacman.stepCounter + ", ";
-        message += "Score:" + pacman.score + " }";
+        message += "\"dotsRemaining\": " + dotsRemaining + ", ";
+        message += "\"energizersRemaining\": " + energizersRemaining+ ", ";
+        message += "\"deaths\": " + pacman.deaths + ", ";
+        message += "\"level\": " + pacman.level + ", ";
+        message += "\"step\": " + pacman.stepCounter + ", ";
+        message += "\"score\":" + pacman.score + " }";
         
         // Transmit the state
         if(((PacMan)state).out != null) {
