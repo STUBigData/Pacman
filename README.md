@@ -9,7 +9,7 @@ This project extends the work of Sean Luke and MASON. The PacMan java code requi
 For both components to communicate, the server and the client must be running and configured to establish a connection.
 
 ## Server:
-The server is a python 3 script that listens on port 1234. It will accept a connection from the PacMan simulator, output the json state at every simulation step, and send a random (N,E,W,S) action for PacMan 0. The server must be running before the simulation can connect to it.
+The server is a python 3 script that listens on port 1234. It will accept a connection from the PacMan simulator, output the json (RFC 4627 json standard) state at every simulation step, and send a random (N,E,W,S) action for PacMan 0. The server must be running before the simulation can connect to it.
 
 python PacServer.py
 
@@ -37,6 +37,9 @@ The simulation can run headless, without the GUI. The parameters are the same as
  java -jar PacMan_Client.jar 1 127.0.0.1 1234 2
  
 ## Output:
+Client transmits a json state to the server. Here is an example of what is transmitted to the server from the client:
+{ "host": "UnknownHost", "date": "06/21/2019", "time": "00:24:15", "energizers": [ { "x": 1, "y": 5 }, { "x": 26, "y": 5 } ], "dots": [ { "x": 0, "y": 16 }, { "x": 1, "y": 3 } ], "ghosts": [ { "name": "Ghost_Blinky", "x": 9.0, "y": 18.5, "lastAction": "S" }, { "name": "Ghost_Pinky", "x": 14.5, "y": 16.0, "lastAction": "W" }, { "name": "Ghost_Inky", "x": 13.5, "y": 15.0, "lastAction": "W" }, { "name": "Ghost_Clyde", "x": 13.5, "y": 16.0, "lastAction": "E" } ], "pacs": [ { "name": "Pac1", "x": 21.0, "y": 25.0, "lastAction": "E" } ], "dotsRemaining": 292, "energizersRemaining": 4, "deaths": 0, "level": 1, "step": 100, "score":80 }
+
  The server will output each state it receives in json format. At the end of the game, by default when the first Pac dies or completes level 1, the simulation will output a score and the number of steps that elapsed in the game in the format "score:180\nsteps:270" to the console, where score and steps are on separate lines.
  
  # Acknowledgement:
