@@ -1,5 +1,5 @@
-# PacMan
-PacMan Simulation and Server
+# PacMan: Cloud AI
+PacMan Simulation and Cloud AI Server
 
 The PacMan simulator is a multiplayer version of PacMan that connects to a server, transmits's the Pacs' states and receives actions (up, down, left, right directions). The Ghosts are controlled by AI that is built in the simulation, not controlled by the server.
 
