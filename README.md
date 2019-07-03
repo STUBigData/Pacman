@@ -5,6 +5,8 @@ The PacMan simulator is a multiplayer version of PacMan that connects to a serve
 
 This project extends the work of Sean Luke and MASON. The PacMan java code requires Mason version 19 to run.
 
+![alt text](https://github.com/STUBigData/Pacman/blob/master/pacmanImage.png)
+
 # Set Up
 For both components to communicate, the server and the client must be running and configured to establish a connection.
 
