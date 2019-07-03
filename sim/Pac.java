@@ -27,13 +27,13 @@ public class Pac extends Agent implements Steppable
     private static final long serialVersionUID = 1;
 
     /** How long we wait while the Pac dies (not spinning). */
-    public static final int WAIT_TIME = 100;
+    public static final int WAIT_TIME = 1;
         
     /** How long we wait while the Pac spins around while dying. */
-    public static final int SPIN_TIME = 100;
+    public static final int SPIN_TIME = 1;
         
     /** How often the Pac rotates 90 degrees while spinning. */
-    public static final int SPIN_SPEED = 5;
+    public static final int SPIN_SPEED = 1;
         
     /** The Pac's discretization (9), which makes him faster than the ghosts, whose discretization is 10. */
     public static final int PAC_DISCRETIZATION = 9;
@@ -244,6 +244,8 @@ public class Pac extends Agent implements Steppable
 	        	System.out.print("x:" + agent.location.x + ",");
 	        	System.out.print("y:" + agent.location.y + ",");
 	        	System.out.print("lastAction:" + agent.lastAction + ",");
+	        	
+	        	
         	}
         }
 
@@ -354,12 +356,14 @@ public class Pac extends Agent implements Steppable
         		message += "{ \"name\": \"" + agent.name + "\", ";
         		message += "\"x\": " + agent.location.x + ", ";
         		message += "\"y\": " + agent.location.y + ", ";
+        		message += "\"frightenTime\": " + ((Ghost)agent).frightened + ", ";
         		message += "\"lastAction\": \"" + lastActionToChar(agent.lastAction) + "\" }";
         		
         		if(ghostsRemaining < numOfGhosts-1) {
         			message += ", ";
         		}
         		ghostsRemaining++;
+        		
         	}
         }
         message += " ], ";

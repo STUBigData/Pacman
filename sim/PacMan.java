@@ -80,9 +80,8 @@ public class PacMan extends SimState
     public PacMan(long seed){
         	super(seed);
         
-	        // Creating a File object that represents the disk file. 
-	        /*
-        	PrintStream o = null;
+	        
+        	
 	        
 			try {
 				InetAddress ipAddress = InetAddress.getLocalHost();
@@ -90,7 +89,10 @@ public class PacMan extends SimState
 			} catch (UnknownHostException e1) {
 				e1.printStackTrace();
 			}
-
+			
+			// Creating a File object that represents the disk file. 
+	        /*
+			PrintStream o = null;
 			try {
 				o = new PrintStream(new File("log_2Player_"+ hostName + ".txt"));
 			} catch (FileNotFoundException e) {
